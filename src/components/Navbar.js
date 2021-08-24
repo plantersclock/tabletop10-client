@@ -25,16 +25,13 @@ const Navbar = () => {
   return (
     <nav className="py-5 flex justify-end bg-gray-700">
       {user ? (
-        <>
-          <div
-            className="text-white mx-5"
-            onClick={logout}
-            style={{ cursor: "pointer" }}
-          >
-            <span className="hover:text-gray-200">{user.email}</span>
-          </div>
-          <Link to="/">HOME</Link>
-        </>
+        <div
+          className="text-white mx-5"
+          onClick={logout}
+          style={{ cursor: "pointer" }}
+        >
+          <span className="hover:text-gray-200">{user.email}</span>
+        </div>
       ) : (
         <div className="text-white space-x-5 mx-5">
           <Link to="/login">
