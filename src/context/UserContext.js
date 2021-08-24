@@ -1,26 +1,32 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import domain from "../util/domain";
 const UserContext = createContext();
 
-function UserContextProvider(props) {
-  const [user, setUser] = useState();
+export const useAuth = () => {
+  return useContext(UserContext);
+};
 
-  async function getUser() {
+const UserContextProvider = ({ children }) => {
+  const [user, setUser] = useState();
+  const [userLoading, setUserLoading] = useState(true);
+
+  const getUser = async () => {
     const userRes = await axios.get(`${domain}/auth/loggedIn`);
     setUser(userRes.data);
-  }
+    setUserLoading(false);
+  };
 
   useEffect(() => {
     getUser();
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, getUser }}>
-      {props.children}
+    <UserContext.Provider value={{ user, userLoading, getUser }}>
+      {!userLoading && children}
     </UserContext.Provider>
   );
-}
+};
 
 export default UserContext;
 export { UserContextProvider };

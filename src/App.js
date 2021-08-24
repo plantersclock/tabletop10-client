@@ -8,6 +8,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import axios from "axios";
 import { UserContextProvider } from "./context/UserContext";
+import PrivateRoute from "./modules/common/PrivateRoute";
 
 axios.defaults.withCredentials = true;
 
@@ -19,7 +20,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <PrivateRoute exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>
