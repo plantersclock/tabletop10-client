@@ -32,6 +32,15 @@
     "test": "craco test",
     "eject": "react-scripts eject"
   },
+  "reactSnap": {
+    "source": "build",
+    "fixWebpackChunksIssue": false,
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    },
+    "inlineCss": true
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
