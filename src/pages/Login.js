@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../context/UserContext";
+import domain from "../util/domain";
 
 // Login component
 const Login = () => {
@@ -20,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     const loginFormBody = { email: loginEmail, password: loginPassword };
     try {
-      await axios.post("http://localhost:5000/auth/login", loginFormBody);
+      await axios.post(`${domain}/auth/login`, loginFormBody);
       await getUser();
       history.push("/");
     } catch (error) {

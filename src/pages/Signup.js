@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../context/UserContext";
+import domain from "../util/domain";
 
 // Signup component
 const Signup = () => {
@@ -27,7 +28,7 @@ const Signup = () => {
 
     // if signup is successful reset loggedInUser and redirect to home, else set state of error
     try {
-      await axios.post("http://localhost:5000/auth/signup", signupFormBody);
+      await axios.post(`${domain}/auth/signup`, signupFormBody);
       await getUser();
       history.push("/");
     } catch (error) {

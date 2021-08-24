@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
+import domain from "../util/domain";
 
 // Navbar component
 const Navbar = () => {
@@ -14,7 +15,7 @@ const Navbar = () => {
   // function to call logout endpoint
   async function logout() {
     try {
-      await axios.get("http://localhost:5000/auth/logOut");
+      await axios.get(`${domain}/auth/logOut`);
       await getUser();
       history.push("/");
     } catch (error) {
