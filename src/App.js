@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import { Switch, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home.tsx";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -17,21 +17,13 @@ function App() {
   return (
     <UserContextProvider>
       <QueryClientProvider client={queryClient}>
-        <div className="App">
-          <h1>Some Data</h1>
-          <Navbar />
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+        </Switch>
+
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </UserContextProvider>

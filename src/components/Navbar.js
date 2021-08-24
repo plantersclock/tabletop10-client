@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import domain from "../util/domain";
+import { logOutUser } from "../api/Queries";
 
 // Navbar component
 const Navbar = () => {
@@ -15,7 +14,7 @@ const Navbar = () => {
   // function to call logout endpoint
   async function logout() {
     try {
-      await axios.get(`${domain}/auth/logOut`);
+      await logOutUser();
       await getUser();
       history.push("/");
     } catch (error) {
@@ -24,15 +23,23 @@ const Navbar = () => {
   }
 
   return (
-    <nav>
+    <nav className="py-5 flex justify-end bg-gray-700">
       {user ? (
-        <div onClick={logout} style={{ cursor: "pointer" }}>
-          {user.email}
+        <div
+          className="text-white mx-5"
+          onClick={logout}
+          style={{ cursor: "pointer" }}
+        >
+          <span className="hover:text-gray-200">{user.email}</span>
         </div>
       ) : (
-        <div>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign up</Link>
+        <div className="text-white space-x-5 mx-5">
+          <Link to="/login">
+            <span className="hover:text-gray-200">Login</span>
+          </Link>
+          <Link to="/signup">
+            <span className="hover:text-gray-200">Sign up</span>
+          </Link>
         </div>
       )}
     </nav>

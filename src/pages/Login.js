@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import UserContext from "../context/UserContext";
-import domain from "../util/domain";
+import { logInUser } from "../api/Queries";
 
 // Login component
 const Login = () => {
   //useStates for form
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [error, setError] = useState("");
 
   // initiate history
   const history = useHistory();
@@ -21,31 +21,44 @@ const Login = () => {
     e.preventDefault();
     const loginFormBody = { email: loginEmail, password: loginPassword };
     try {
-      await axios.post(`${domain}/auth/login`, loginFormBody);
+      await logInUser(loginFormBody);
       await getUser();
       history.push("/");
     } catch (error) {
       console.log({ error });
+      setError(error.response.data.errorMessage);
     }
   }
 
   return (
-    <div>
-      <h3>Login</h3>
+    <div className="container mx-auto">
+      <h3 className="text-gray-800 font-medium text-2xl py-6">Login</h3>
       <form onSubmit={login}>
-        <label htmlFor="loginEmail">Email</label>
-        <input
-          id="loginEmail"
-          type="email"
-          onChange={(e) => setLoginEmail(e.target.value)}
-        ></input>
-        <label htmlFor="loginPassword">Password</label>
-        <input
-          id="loginPassword"
-          type="password"
-          onChange={(e) => setLoginPassword(e.target.value)}
-        ></input>
-        <button type="submit">Login</button>
+        <div className="flex flex-col">
+          <label htmlFor="loginEmail">Email</label>
+          <input
+            id="loginEmail"
+            type="email"
+            className="rounded-md bg-gray-50 mt-1"
+            onChange={(e) => setLoginEmail(e.target.value)}
+          ></input>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="loginPassword">Password</label>
+          <input
+            id="loginPassword"
+            type="password"
+            className="rounded-md bg-gray-50 mt-1"
+            onChange={(e) => setLoginPassword(e.target.value)}
+          ></input>
+        </div>
+        <button
+          type="submit"
+          className="mt-6 bg-gray-500 text-white font-medium rounded-lg py-1 px-2 hover:bg-gray-600"
+        >
+          Login
+        </button>
+        {error && <div className="text-red-500 mt-2">{error}</div>}
       </form>
     </div>
   );
