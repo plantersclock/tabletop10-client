@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import UserContext from "../context/UserContext";
-import domain from "../util/domain";
 import { signUpUser } from "../api/Queries";
 
 // Signup component
