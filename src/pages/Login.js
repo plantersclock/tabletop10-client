@@ -23,7 +23,7 @@ const Login = () => {
     try {
       await logInUser(loginFormBody);
       await getUser();
-      history.push("/");
+      history.push("/admin");
     } catch (error) {
       console.log({ error });
       setError(error.response.data.errorMessage);

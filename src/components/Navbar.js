@@ -23,7 +23,8 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="py-5 flex justify-end bg-gray-700">
+    <nav className="py-5 flex justify-between bg-gray-700">
+      <div className="ml-5 text-white font-bold text-xl">ADMIN PANEL</div>
       {user ? (
         <div
           className="text-white mx-5"
