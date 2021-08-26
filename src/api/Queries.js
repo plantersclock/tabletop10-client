@@ -45,7 +45,6 @@ export const getAllRatings = async () => {
 };
 
 export const createRating = async (createRatingFormBody) => {
-  console.log("here");
   return await axios.post(domain + "/rating/create", createRatingFormBody);
 };
 
@@ -56,5 +55,7 @@ export const searchGameName = async (gameName) => {
 
 // Rating Get
 export const getGameInfo = async (gameIds) => {
+  if (gameIds.length > 25)
+    console.log("There might be missing data because over 25 items");
   return await axios.get(domain + `/game/?gameIds=${gameIds}`);
 };

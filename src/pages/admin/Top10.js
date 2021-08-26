@@ -39,7 +39,7 @@ const getTop10 = (games) => {
 
 const Top10 = () => {
   let { year } = useParams();
-  const [ratings, setRatings] = useState(null);
+
   const [top10Games, setTop10Games] = useState(null);
   const [uniqueIds, setUniqueIds] = useState([]);
   const [gameInfo, setGameInfo] = useState(null);
@@ -51,27 +51,23 @@ const Top10 = () => {
       filteredData = filteredData.filter(
         (rating) => rating.year === parseInt(year)
       );
-      setRatings(filteredData);
+
+      let uniqueFilteredData = _.uniqBy(filteredData, "game");
+      let gamesWithScores = uniqueFilteredData.map((game) => {
+        return getScore(game.game, game.bgAtlasId, filteredData);
+      });
+      let top10List = getTop10(gamesWithScores);
+      let uniqueGameIds = [
+        ...new Set(
+          top10List.map((item) => {
+            return item.gameId;
+          })
+        ),
+      ];
+      setUniqueIds(uniqueGameIds);
+      setTop10Games(top10List);
     }
   }, [data, year]);
-
-  useEffect(() => {
-    if (!ratings) return;
-    let uniqueGameIds = [
-      ...new Set(
-        ratings.map((item) => {
-          return item.bgAtlasId;
-        })
-      ),
-    ];
-    setUniqueIds(uniqueGameIds);
-    let uniqueGames = _.uniqBy(ratings, "game");
-    let gamesWithScores = uniqueGames.map((game) => {
-      return getScore(game.game, game.bgAtlasId, ratings);
-    });
-
-    setTop10Games(getTop10(gamesWithScores));
-  }, [ratings]);
 
   const gameInfoQuery = useQuery(
     ["bgAtlasGames", year],

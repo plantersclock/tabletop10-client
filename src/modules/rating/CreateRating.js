@@ -47,6 +47,8 @@ const CreateRating = () => {
     }
   );
 
+  console.log(games);
+
   useEffect(() => {
     if (gameSearchQuery?.data?.data?.data?.games) {
       setGames(gameSearchQuery.data.data.data.games);
@@ -146,8 +148,8 @@ const CreateRating = () => {
               required
             >
               {games.map((game) => (
-                <option label={game.name} value={game.id}>
-                  {game.name}
+                <option value={game.id}>
+                  {game.name} - {game.year_published}
                 </option>
               ))}
             </select>

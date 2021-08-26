@@ -16,13 +16,15 @@ const Rating = () => {
   }, [ratingQuery]);
   return (
     <div>
-      {ratings &&
-        ratings.map((rating) => (
-          <div key={rating._id}>
-            {rating.year} - {rating.reviewer.name} - {rating.rank} -{" "}
-            {rating.game}
-          </div>
-        ))}
+      <div className="max-h-72 overflow-y-auto">
+        {ratings &&
+          ratings.map((rating) => (
+            <div key={rating._id}>
+              {rating.year} - {rating.reviewer.name} - {rating.rank} -{" "}
+              {rating.game}
+            </div>
+          ))}
+      </div>
       <Link
         className="inline-block mt-6 py-1 px-2 text-white bg-green-500 hover:bg-green-600 rounded"
         to={`${path}/create`}
