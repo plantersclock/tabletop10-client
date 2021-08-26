@@ -24,7 +24,7 @@ function App() {
           <PrivateRoute path="/admin" component={Admin} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/" component={Top10} />
+          <Route path="/top10/:year" component={Top10} />
         </Switch>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

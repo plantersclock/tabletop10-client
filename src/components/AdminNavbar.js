@@ -4,7 +4,7 @@ import { useAuth } from "../context/UserContext";
 import { logOutUser } from "../api/Queries";
 
 // Navbar component
-const Navbar = () => {
+const AdminNavbar = () => {
   // get context for user
   const { user, getUser } = useAuth();
 
@@ -47,4 +47,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;

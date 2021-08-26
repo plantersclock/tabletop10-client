@@ -11,7 +11,9 @@ import {
   ClockIcon,
 } from "@heroicons/react/outline";
 
-const GameInfo = ({ gameId = "TAAifFP590" }) => {
+const zeroPad = (num, places) => String(num).padStart(places, "0");
+
+const GameInfo = ({ gameId = null, rank = null }) => {
   const [gameInfo, setGameInfo] = useState(null);
   const gameInfoQuery = useQuery(["game", gameId], () => getGameInfo(gameId), {
     enabled: !!gameId,
@@ -27,9 +29,12 @@ const GameInfo = ({ gameId = "TAAifFP590" }) => {
   return (
     <>
       {gameInfo && (
-        <div className="container max-w-5xl bg-theme-gray-500 mx-auto bg-opacity-25 px-24 py-12">
-          <div className="text-7xl relative ">
-            {gameInfo.name}
+        <div className="container max-w-5xl bg-theme-gray-500 mx-auto bg-opacity-25 px-24 py-12 mt-16">
+          <div className="text-8xl relative">
+            <div className="absolute text-11xl text-theme-orange-500 -top-24 -right-10">
+              {zeroPad(rank, 2)}
+            </div>
+            <div className="max-w-2xl">{gameInfo.name}</div>
             <div className="overflow-hidden absolute overflow-hidden -left-80 top-0 w-72 -mt-4 ml-2 opacity-20 filter blur-2xl">
               <img
                 className="transform scale-150 w-72 object-cover"
@@ -38,13 +43,14 @@ const GameInfo = ({ gameId = "TAAifFP590" }) => {
             </div>
             <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2">
               <img
-                className="transform scale-150"
+                className="transform scale-145"
                 src={gameInfo.images.medium}
               />
             </div>
           </div>
 
           <div
+            className="font-light font-sans mt-4"
             dangerouslySetInnerHTML={{ __html: sanitize(gameInfo.description) }}
           ></div>
 

@@ -237,6 +237,7 @@ module.exports = {
       "7xl": ["4.5rem", { lineHeight: "1" }],
       "8xl": ["6rem", { lineHeight: "1" }],
       "9xl": ["8rem", { lineHeight: "1" }],
+      "11xl": ["11rem", { lineHeight: "1" }],
     },
     fontWeight: {
       thin: "100",
@@ -639,6 +640,9 @@ module.exports = {
       105: "1.05",
       110: "1.1",
       125: "1.25",
+      135: "1.35",
+      140: "1.4",
+      145: "1.45",
       150: "1.5",
     },
     skew: {
