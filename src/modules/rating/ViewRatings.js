@@ -23,6 +23,8 @@ const ViewRatings = ({ reviewerName = null, year = null }) => {
     setRatings(filteredData);
   }, [ratingQuery, year, reviewerName]);
 
+  console.log(ratings);
+
   return (
     <div>
       {ratings &&

@@ -10,6 +10,8 @@ import PrivateRoute from "./modules/common/PrivateRoute";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+import Top10 from "./pages/admin/Top10";
+
 axios.defaults.withCredentials = true;
 
 const queryClient = new QueryClient();
@@ -22,6 +24,7 @@ function App() {
           <PrivateRoute path="/admin" component={Admin} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/" component={Top10} />
         </Switch>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

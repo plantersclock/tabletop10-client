@@ -26,25 +26,11 @@ module.exports = {
       current: "currentColor",
 
       theme: {
-        "purple-200": "#945EFF",
-        "purple-300": "#8C52FF",
-        "purple-400": "#7D49E6",
-        "purple-500": "#693DBF",
-        "purple-600": "#462980",
-        "purple-700": "#231440",
-
-        "green-200": "#d0ffa1",
-        "green-300": "#a2ff45",
-        "green-400": "#92e63e",
-        "green-500": "#79bf34",
-        "green-600": "#518022",
-        "green-700": "#284011",
-
-        "red-300": "#ff3863",
-        "red-400": "#e63259",
-        "red-500": "#bf2a4a",
-        "red-600": "#801c32",
-        "red-700": "#400e19",
+        "orange-500": "#E75B00",
+        "gray-900": "#3C3C3C",
+        "gray-500": "#A39594",
+        "gray-300": "#CEC4C2",
+        "gray-100": "#DFDFDF",
       },
       black: colors.black,
       white: colors.white,
@@ -235,6 +221,7 @@ module.exports = {
         '"Courier New"',
         "monospace",
       ],
+      teko: ["teko"],
     },
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1rem" }],

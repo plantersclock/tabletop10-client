@@ -53,3 +53,8 @@ export const createRating = async (createRatingFormBody) => {
 export const searchGameName = async (gameName) => {
   return await axios.get(domain + `/game/search/?name=${gameName}`);
 };
+
+// Rating Get
+export const getGameInfo = async (gameId) => {
+  return await axios.get(domain + `/game/?gameId=${gameId}`);
+};
