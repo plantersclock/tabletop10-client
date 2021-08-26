@@ -15,9 +15,10 @@ const getScore = (gameName, gameId, ratings) => {
   return { gameName, gameId, score };
 };
 
-const getTop10 = (scoredGames) => {
+const getTop10 = (games) => {
   let top10 = [];
   let rank = 1;
+  let scoredGames = _.orderBy(games, ["score", "gameName"], ["desc", "asc"]);
 
   for (let i = 0; i < scoredGames.length; i++) {
     if (top10[i - 1]) {
@@ -65,16 +66,10 @@ const Top10 = () => {
     ];
     setUniqueIds(uniqueGameIds);
     let uniqueGames = _.uniqBy(ratings, "game");
-
     let gamesWithScores = uniqueGames.map((game) => {
       return getScore(game.game, game.bgAtlasId, ratings);
     });
-    let orderedScoredGames = _.orderBy(
-      gamesWithScores,
-      ["score", "gameName"],
-      ["desc", "asc"]
-    );
-    setTop10Games(getTop10(orderedScoredGames));
+    setTop10Games(getTop10(gamesWithScores));
   }, [ratings]);
 
   const gameInfoQuery = useQuery(
@@ -91,8 +86,6 @@ const Top10 = () => {
     setGameInfo(gameInfoQuery.data.data.data.games);
   }, [gameInfoQuery]);
 
-  console.log(top10Games);
-
   return (
     <div className="bg-theme-gray-900 font-teko min-h-screen text-theme-gray-100">
       <Navbar />
@@ -101,6 +94,7 @@ const Top10 = () => {
           gameInfo &&
           top10Games.map((game) => (
             <GameInfo
+              key={game.gameId}
               gameId={game.gameId}
               rank={game.rank}
               gameInfo={gameInfo.find(({ id }) => id === game.gameId)}

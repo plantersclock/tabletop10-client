@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { sanitize } from "dompurify";
-
-import { getGameInfo } from "../../api/Queries";
 
 import {
   HeartIcon,
@@ -13,7 +9,7 @@ import {
 
 const zeroPad = (num, places) => String(num).padStart(places, "0");
 
-const GameInfo = ({ gameId = null, rank = null, gameInfo }) => {
+const GameInfo = ({ rank = null, gameInfo }) => {
   return (
     <>
       {gameInfo && (
