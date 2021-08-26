@@ -42,7 +42,7 @@ const Top10 = () => {
   const [ratings, setRatings] = useState(null);
   const [top10Games, setTop10Games] = useState(null);
 
-  const { status, data } = useQuery("ratings", getAllRatings);
+  const { data } = useQuery("ratings", getAllRatings);
 
   useEffect(() => {
     if (data?.data) {
@@ -74,7 +74,7 @@ const Top10 = () => {
       ["desc", "asc"]
     );
     setTop10Games(getTop10(orderedScoredGames));
-  }, ratings);
+  }, [ratings]);
 
   console.log(top10Games);
 
