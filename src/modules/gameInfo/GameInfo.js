@@ -39,12 +39,14 @@ const GameInfo = ({ gameId = null, rank = null }) => {
               <img
                 className="transform scale-150 w-72 object-cover"
                 src={gameInfo.images.thumb}
+                alt="backgroundBlur"
               />
             </div>
             <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2">
               <img
                 className="transform scale-145"
                 src={gameInfo.images.medium}
+                alt="gameImage"
               />
             </div>
           </div>
