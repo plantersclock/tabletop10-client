@@ -65,7 +65,7 @@ const Top10 = () => {
     ];
     setUniqueIds(uniqueGameIds);
     let uniqueGames = _.uniqBy(ratings, "game");
-    console.log(uniqueGames);
+
     let gamesWithScores = uniqueGames.map((game) => {
       return getScore(game.game, game.bgAtlasId, ratings);
     });
@@ -87,7 +87,6 @@ const Top10 = () => {
 
   useEffect(() => {
     if (!gameInfoQuery?.data?.data?.data?.games) return;
-    console.log(gameInfoQuery.data.data.data.games);
 
     setGameInfo(gameInfoQuery.data.data.data.games);
   }, [gameInfoQuery]);
