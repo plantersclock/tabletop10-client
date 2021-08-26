@@ -5,14 +5,15 @@ import {
   getAllReviewers,
   searchGameName,
 } from "../../api/Queries";
+import { DebounceInput } from "react-debounce-input";
 import ViewRatings from "./ViewRatings";
 
 const CreateRating = () => {
-  const rankRef = useRef();
   const reviewerIdRef = useRef();
   const gameRef = useRef();
   const [error, setError] = useState();
   const [year, setYear] = useState(null);
+  const [rank, setRank] = useState(null);
   const [reviewerId, setReviewerId] = useState(null);
 
   const [reviewers, setReviewers] = useState(null);
@@ -60,6 +61,8 @@ const CreateRating = () => {
     },
     onSuccess: async () => {
       console.log("Added");
+      setGameName("");
+      setRank((prevRank) => parseInt(prevRank) + 1);
       queryClient.invalidateQueries("ratings");
     },
   });
@@ -72,7 +75,7 @@ const CreateRating = () => {
 
     const body = {
       year,
-      rank: rankRef.current.value,
+      rank: rank,
       reviewer: reviewerIdRef.current.value,
       game: game,
       bgAtlasId: gameRef.current.value,
@@ -117,20 +120,23 @@ const CreateRating = () => {
             id="ratingRank"
             type="number"
             className="rounded-md bg-gray-50 mt-1"
-            ref={rankRef}
+            value={rank}
+            onChange={(e) => setRank(e.target.value)}
             required
           ></input>
         </div>
 
         <div className="flex flex-col">
           <label htmlFor="reviewerId">Game</label>
-          <input
+          <DebounceInput
             id="gameSearch"
+            debounceTimeout={300}
             type="text"
             autoComplete="off"
             className="rounded-md bg-gray-50 mt-1"
+            value={gameName}
             onChange={(e) => setGameName(e.target.value)}
-          ></input>
+          ></DebounceInput>
 
           {games && (
             <select

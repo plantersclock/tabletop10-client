@@ -26,7 +26,7 @@ const getTop10 = (games) => {
         top10.push({ ...scoredGames[i], rank });
       } else {
         rank++;
-        if (rank > 10) return;
+        if (rank > 10) return top10;
         top10.push({ ...scoredGames[i], rank });
       }
     } else {
@@ -69,6 +69,7 @@ const Top10 = () => {
     let gamesWithScores = uniqueGames.map((game) => {
       return getScore(game.game, game.bgAtlasId, ratings);
     });
+
     setTop10Games(getTop10(gamesWithScores));
   }, [ratings]);
 
