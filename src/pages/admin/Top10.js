@@ -3,7 +3,7 @@ import Navbar from "../../modules/navbar/NavBar";
 import GameInfo from "../../modules/gameInfo/GameInfo";
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
-import { getAllRatings } from "../../api/Queries";
+import { getAllRatings, getGameInfo } from "../../api/Queries";
 import _ from "lodash";
 
 const getScore = (gameName, gameId, ratings) => {
@@ -38,10 +38,10 @@ const getTop10 = (scoredGames) => {
 
 const Top10 = () => {
   let { year } = useParams();
-
   const [ratings, setRatings] = useState(null);
   const [top10Games, setTop10Games] = useState(null);
-
+  const [uniqueIds, setUniqueIds] = useState([]);
+  const [gameInfo, setGameInfo] = useState(null);
   const { data } = useQuery("ratings", getAllRatings);
 
   useEffect(() => {
@@ -56,13 +56,14 @@ const Top10 = () => {
 
   useEffect(() => {
     if (!ratings) return;
-    // let unique = [
-    //   ...new Set(
-    //     ratings.map((item) => {
-    //       return { name: item.game, id: item.bgAtlasId };
-    //     })
-    //   ),
-    // ];
+    let uniqueGameIds = [
+      ...new Set(
+        ratings.map((item) => {
+          return item.bgAtlasId;
+        })
+      ),
+    ];
+    setUniqueIds(uniqueGameIds);
     let uniqueGames = _.uniqBy(ratings, "game");
     console.log(uniqueGames);
     let gamesWithScores = uniqueGames.map((game) => {
@@ -76,6 +77,21 @@ const Top10 = () => {
     setTop10Games(getTop10(orderedScoredGames));
   }, [ratings]);
 
+  const gameInfoQuery = useQuery(
+    ["bgAtlasGames", year],
+    () => getGameInfo(uniqueIds),
+    {
+      enabled: uniqueIds.length > 0,
+    }
+  );
+
+  useEffect(() => {
+    if (!gameInfoQuery?.data?.data?.data?.games) return;
+    console.log(gameInfoQuery.data.data.data.games);
+
+    setGameInfo(gameInfoQuery.data.data.data.games);
+  }, [gameInfoQuery]);
+
   console.log(top10Games);
 
   return (
@@ -83,8 +99,13 @@ const Top10 = () => {
       <Navbar />
       <div className="pl-48">
         {top10Games &&
+          gameInfo &&
           top10Games.map((game) => (
-            <GameInfo gameId={game.gameId} rank={game.rank} />
+            <GameInfo
+              gameId={game.gameId}
+              rank={game.rank}
+              gameInfo={gameInfo.find(({ id }) => id === game.gameId)}
+            />
           ))}
       </div>
     </div>

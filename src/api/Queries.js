@@ -55,6 +55,7 @@ export const searchGameName = async (gameName) => {
 };
 
 // Rating Get
-export const getGameInfo = async (gameId) => {
-  return await axios.get(domain + `/game/?gameId=${gameId}`);
+export const getGameInfo = async (gameIds) => {
+  console.log(gameIds);
+  return await axios.get(domain + `/game/?gameIds=${gameIds}`);
 };

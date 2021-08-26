@@ -13,19 +13,7 @@ import {
 
 const zeroPad = (num, places) => String(num).padStart(places, "0");
 
-const GameInfo = ({ gameId = null, rank = null }) => {
-  const [gameInfo, setGameInfo] = useState(null);
-  const gameInfoQuery = useQuery(["game", gameId], () => getGameInfo(gameId), {
-    enabled: !!gameId,
-  });
-
-  useEffect(() => {
-    if (!gameInfoQuery?.data?.data?.data?.games[0]) return;
-    console.log(gameInfoQuery.data.data.data.games[0]);
-
-    setGameInfo(gameInfoQuery.data.data.data.games[0]);
-  }, [gameInfoQuery]);
-
+const GameInfo = ({ gameId = null, rank = null, gameInfo }) => {
   return (
     <>
       {gameInfo && (
