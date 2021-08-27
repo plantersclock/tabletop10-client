@@ -1,5 +1,6 @@
 import React from "react";
 import GameInfo from "../gameInfo/GameInfo";
+import RatingInfo from "../ratingInfo/RatingInfo";
 
 const GameSection = ({ rank, gameInfo, ratings }) => {
   console.log(ratings);
@@ -11,6 +12,7 @@ const GameSection = ({ rank, gameInfo, ratings }) => {
         rank={rank}
         gameInfo={gameInfo}
       />
+      <RatingInfo ratings={ratings} />
     </div>
   );
 };
