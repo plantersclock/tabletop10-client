@@ -6,6 +6,7 @@ import {
   UsersIcon,
   ClockIcon,
 } from "@heroicons/react/outline";
+import LazyLoad from "react-lazyload";
 
 const zeroPad = (num, places) => String(num).padStart(places, "0");
 
@@ -19,20 +20,22 @@ const GameInfo = ({ rank = null, gameInfo }) => {
               {zeroPad(rank, 2)}
             </div>
             <div className="max-w-2xl">{gameInfo.name}</div>
-            <div className="overflow-hidden absolute overflow-hidden -left-80 top-0 w-72 -mt-4 ml-2 opacity-20 filter blur-2xl">
-              <img
-                className="transform scale-150 w-72 object-cover"
-                src={gameInfo.images.thumb}
-                alt="backgroundBlur"
-              />
-            </div>
-            <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2">
-              <img
-                className="transform scale-145"
-                src={gameInfo.images.medium}
-                alt="gameImage"
-              />
-            </div>
+            <LazyLoad offset={200}>
+              <div className="overflow-hidden absolute overflow-hidden -left-80 top-0 w-72 -mt-4 ml-2 opacity-20 filter blur-2xl">
+                <img
+                  className="transform scale-150 w-72 object-cover"
+                  src={gameInfo.images.thumb}
+                  alt="backgroundBlur"
+                />
+              </div>
+              <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2">
+                <img
+                  className="transform scale-145"
+                  src={gameInfo.images.medium}
+                  alt="gameImage"
+                />
+              </div>
+            </LazyLoad>
           </div>
 
           <div
