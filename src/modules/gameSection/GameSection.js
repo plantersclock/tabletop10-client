@@ -12,7 +12,7 @@ const GameSection = ({ rank, gameInfo, ratings, setDisplayRank }) => {
     }
   }, [inView, rank, setDisplayRank]);
   return (
-    <div className="relative">
+    <div className="relative mt-24">
       <div className="absolute top-96" ref={ref}></div>
       <div className="relative max-w-5xl mx-auto">
         <div className="relative z-50">
@@ -25,7 +25,7 @@ const GameSection = ({ rank, gameInfo, ratings, setDisplayRank }) => {
 
           <RatingInfo ratings={ratings} />
         </div>
-        <div className="absolute h-full top-5 left-5 bg-theme-gray-50 container z-10"></div>
+        <div className="absolute h-full top-7 left-7 bg-theme-gray-50 container z-10"></div>
       </div>
     </div>
   );

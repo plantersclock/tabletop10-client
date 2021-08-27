@@ -39,7 +39,7 @@ const GameInfo = ({ rank = null, gameInfo }) => {
           </div>
 
           <div
-            className="font-light font-sans mt-4"
+            className="font-sans mt-4"
             dangerouslySetInnerHTML={{ __html: sanitize(gameInfo.description) }}
           ></div>
 
