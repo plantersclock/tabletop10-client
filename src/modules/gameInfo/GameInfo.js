@@ -53,7 +53,9 @@ const GameInfo = ({ rank = null, gameInfo }) => {
             <div className="flex flex-col items-center">
               <ClockIcon className="h-10 text-theme-gray-300" />
               <div className="text-theme-gray-100 text-2xl">
-                {gameInfo.min_playtime} - {gameInfo.max_playtime}
+                {gameInfo.min_playtime === gameInfo.max_playtime
+                  ? gameInfo.max_playtime
+                  : `${gameInfo.min_playtime} - ${gameInfo.max_playtime}`}
               </div>
             </div>
             <div className="flex flex-col items-center">
