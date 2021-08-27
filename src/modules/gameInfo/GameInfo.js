@@ -28,9 +28,9 @@ const GameInfo = ({ rank = null, gameInfo }) => {
                   alt="backgroundBlur"
                 />
               </div>
-              <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2 bg-white border-8 border-theme-gray-900">
+              <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2 bg-white border-8 border-theme-gray-500">
                 <img
-                  className="transform "
+                  className="transform scale-145"
                   src={gameInfo.images.medium}
                   alt="gameImage"
                 />
