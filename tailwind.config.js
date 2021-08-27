@@ -19,6 +19,7 @@ module.exports = {
       lg: "1024px",
       xl: "1280px",
       "2xl": "1536px",
+      "3xl": "1919px",
     },
 
     colors: {
@@ -238,6 +239,7 @@ module.exports = {
       "8xl": ["6rem", { lineHeight: "1" }],
       "9xl": ["8rem", { lineHeight: "1" }],
       "11xl": ["11rem", { lineHeight: "1" }],
+      "13xl": ["13rem", { lineHeight: "1" }],
     },
     fontWeight: {
       thin: "100",

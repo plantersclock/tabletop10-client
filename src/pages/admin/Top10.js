@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { getAllRatings, getGameInfo } from "../../api/Queries";
 import _ from "lodash";
 import GameSection from "../../modules/gameSection/GameSection";
+import FixedYearRank from "../../modules/ratingInfo/FixedYearRank";
 
 const getScore = (gameName, gameId, ratings) => {
   let gameRatings = ratings.filter((rating) => rating.game.includes(gameName));
@@ -44,6 +45,7 @@ const Top10 = () => {
   const [gameInfo, setGameInfo] = useState(null);
   const [groupedRatings, setGroupedRatings] = useState(null);
   const { data } = useQuery("ratings", getAllRatings);
+  const [displayRank, setDisplayRank] = useState(1);
 
   useEffect(() => {
     if (data?.data) {
@@ -88,7 +90,8 @@ const Top10 = () => {
   return (
     <div className="bg-theme-gray-900 font-teko min-h-screen text-theme-gray-100">
       <Navbar />
-      <div className="pl-48">
+      {displayRank && <FixedYearRank year={year} rank={displayRank} />}
+      <div className="pl-48 3xl:pl-0">
         {top10Games &&
           gameInfo &&
           groupedRatings &&
@@ -98,6 +101,7 @@ const Top10 = () => {
               rank={game.rank}
               gameInfo={gameInfo.find(({ id }) => id === game.gameId)}
               ratings={groupedRatings[game.gameId]}
+              setDisplayRank={setDisplayRank}
             />
           ))}
       </div>
