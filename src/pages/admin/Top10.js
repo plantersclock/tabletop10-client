@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../modules/navbar/NavBar";
-import GameInfo from "../../modules/gameInfo/GameInfo";
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
 import { getAllRatings, getGameInfo } from "../../api/Queries";
 import _ from "lodash";
+import GameSection from "../../modules/gameSection/GameSection";
 
 const getScore = (gameName, gameId, ratings) => {
   let gameRatings = ratings.filter((rating) => rating.game.includes(gameName));
@@ -39,10 +39,10 @@ const getTop10 = (games) => {
 
 const Top10 = () => {
   let { year } = useParams();
-
   const [top10Games, setTop10Games] = useState(null);
   const [uniqueIds, setUniqueIds] = useState([]);
   const [gameInfo, setGameInfo] = useState(null);
+  const [groupedRatings, setGroupedRatings] = useState(null);
   const { data } = useQuery("ratings", getAllRatings);
 
   useEffect(() => {
@@ -51,6 +51,8 @@ const Top10 = () => {
       filteredData = filteredData.filter(
         (rating) => rating.year === parseInt(year)
       );
+      let groupedGamesById = _.groupBy(filteredData, "bgAtlasId");
+      setGroupedRatings(groupedGamesById);
 
       let uniqueFilteredData = _.uniqBy(filteredData, "game");
       let gamesWithScores = uniqueFilteredData.map((game) => {
@@ -89,12 +91,13 @@ const Top10 = () => {
       <div className="pl-48">
         {top10Games &&
           gameInfo &&
+          groupedRatings &&
           top10Games.map((game) => (
-            <GameInfo
-              key={game.gameId}
-              gameId={game.gameId}
+            <GameSection
+              key={"section_" + game.gameId}
               rank={game.rank}
               gameInfo={gameInfo.find(({ id }) => id === game.gameId)}
+              ratings={groupedRatings[game.gameId]}
             />
           ))}
       </div>
