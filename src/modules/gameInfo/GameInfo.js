@@ -14,7 +14,7 @@ const GameInfo = ({ rank = null, gameInfo }) => {
   return (
     <>
       {gameInfo && (
-        <div className="container max-w-5xl bg-theme-gray-500 mx-auto bg-opacity-25 px-24 py-12 mt-16">
+        <div className="container max-w-5xl bg-theme-gray-700 mx-auto px-24 py-12 mt-16 shadow-lg">
           <div className="text-8xl relative">
             <div className="absolute text-11xl text-theme-orange-500 -top-24 -right-10">
               {zeroPad(rank, 2)}
@@ -28,9 +28,9 @@ const GameInfo = ({ rank = null, gameInfo }) => {
                   alt="backgroundBlur"
                 />
               </div>
-              <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2">
+              <div className="overflow-hidden absolute overflow-hidden -left-72 top-0 w-60 mt-2 bg-white border-8 border-theme-gray-900">
                 <img
-                  className="transform scale-145"
+                  className="transform "
                   src={gameInfo.images.medium}
                   alt="gameImage"
                 />

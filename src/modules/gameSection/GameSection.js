@@ -14,14 +14,19 @@ const GameSection = ({ rank, gameInfo, ratings, setDisplayRank }) => {
   return (
     <div className="relative">
       <div className="absolute top-96" ref={ref}></div>
-      <GameInfo
-        key={gameInfo.gameId}
-        gameId={gameInfo.gameId}
-        rank={rank}
-        gameInfo={gameInfo}
-      />
+      <div className="relative max-w-5xl mx-auto">
+        <div className="relative z-50">
+          <GameInfo
+            key={gameInfo.gameId}
+            gameId={gameInfo.gameId}
+            rank={rank}
+            gameInfo={gameInfo}
+          />
 
-      <RatingInfo ratings={ratings} />
+          <RatingInfo ratings={ratings} />
+        </div>
+        <div className="absolute h-full top-5 left-5 bg-theme-gray-50 container z-10"></div>
+      </div>
     </div>
   );
 };

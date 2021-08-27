@@ -29,9 +29,11 @@ module.exports = {
       theme: {
         "orange-500": "#E75B00",
         "gray-900": "#3C3C3C",
+        "gray-700": "#646060",
         "gray-500": "#A39594",
         "gray-300": "#CEC4C2",
         "gray-100": "#DFDFDF",
+        "gray-50": "#F9F5F2",
       },
       black: colors.black,
       white: colors.white,
